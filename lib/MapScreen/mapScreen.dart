@@ -73,6 +73,7 @@ class _DriverFleetTrackingPageState extends State<GoogleMapPage> {
     );
     latitudePosition = -200;
     dbFoodTruck.clear();
+    foodTypeArray.clear();
     index = 0;
     final allRows = await foodTruckDatabaseHelper.queryAllRowsFoodTruck();
     if(allRows.length > 0){
@@ -187,7 +188,6 @@ class _DriverFleetTrackingPageState extends State<GoogleMapPage> {
           print(dbFoodTruck[i].longitude);
         }
         allMarkers = dbFoodTruck.map((element) {
-          foodTypeArray.add(element.foodType);
           Marker marker = Marker(
             markerId: MarkerId(index.toString()),
             position: LatLng(double.parse(element.latitude), double.parse(element.longitude)),
@@ -345,6 +345,7 @@ class _DriverFleetTrackingPageState extends State<GoogleMapPage> {
               )
               : GestureDetector(
                 onTap: (){
+                  _typeAheadController.text = '';
                   getAllVehicleListingCall();
                   setState(() {
                     searchValue = false;
