@@ -71,8 +71,7 @@ class FoodTruckDatabaseHelper {
 
   Future<int> updateFoodTruck(Map<String, dynamic> row, int colId) async {
     Database db = await instance.database;
-    int id = row[colId];
-    return await db.update(offlineFoodTruck, row, where: '$colId = ?', whereArgs: [id]);
+    return await db.update(offlineFoodTruck, row, where: '$colId = ?', whereArgs: [colId]);
   }
 
   Future<void> deleteRowFoodTruck(int colId) async {

@@ -104,7 +104,19 @@ class _DriverFleetTrackingPageState extends State<GoogleMapPage> {
           print(dbFoodTruck[i].longitude);
         }
         allMarkers = dbFoodTruck.map((element) {
-          foodTypeArray.add(element.foodType);
+          int checkValue = 0;
+          if(foodTypeArray != null){
+            if(foodTypeArray.length > 0){
+              for(var i = 0 ; i < foodTypeArray.length ; i++){
+                if(foodTypeArray[i] == element.foodType){
+                  checkValue = 1;
+                }
+              }
+            }
+          }
+          if(checkValue == 0){
+            foodTypeArray.add(element.foodType);
+          }
           Marker marker = Marker(
             markerId: MarkerId(index.toString()),
             position: LatLng(double.parse(element.latitude), double.parse(element.longitude)),
@@ -455,7 +467,7 @@ class MapPinPillComponentState extends State<MapPinPillComponent> {
         child: Container(
           margin: EdgeInsets.all(20),
           padding: EdgeInsets.all(12.0),
-          height: 115,
+          height: 140,
           width: 200,
           decoration: BoxDecoration(
               color: Colors.white,
